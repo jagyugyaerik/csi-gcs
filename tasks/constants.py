@@ -1,4 +1,4 @@
-GCSFUSE_VERSION = '0.35.0'
+GCSFUSE_VERSION = '0.40.0'
 
 REPO = 'ofekmeister'
 IMAGE = 'csi-gcs'
