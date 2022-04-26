@@ -36,5 +36,5 @@ ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/driver"]
 
 # Copy the binaries
 COPY --from=build-gcsfuse /go/bin/gcsfuse /usr/local/bin/
-COPY --from=build-gcsfuse /go/bin/bin/gcsfuse /sbin/
+COPY --from=build-gcsfuse /go/bin/gcsfuse /sbin/
 COPY bin/driver /usr/local/bin/
