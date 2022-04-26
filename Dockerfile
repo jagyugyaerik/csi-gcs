@@ -1,4 +1,4 @@
-FROM golang:1.15.6-alpine3.12 AS build-gcsfuse
+FROM golang:1.17.9-alpine3.14 AS build-gcsfuse
 
 ARG gcsfuse_version
 ARG global_ldflags
