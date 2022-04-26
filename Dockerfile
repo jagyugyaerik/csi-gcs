@@ -12,10 +12,6 @@ RUN mkdir /tmp/bin
 
 # Install gcsfuse using the specified version or commit hash
 RUN go install github.com/googlecloudplatform/gcsfuse@latest
-RUN go install github.com/googlecloudplatform/gcsfuse/tools/build_gcsfuse@latest
-RUN git clone https://github.com/googlecloudplatform/gcsfuse && cd gcsfuse && git checkout "v${gcsfuse_version}"
-RUN mkdir /tmp/gcsfuse
-RUN build_gcsfuse ${GOPATH}/src/github.com/googlecloudplatform/gcsfuse /tmp/gcsfuse ${gcsfuse_version} -ldflags "all=${global_ldflags}" -ldflags "-X main.gcsfuseVersion=${gcsfuse_version} ${global_ldflags}"
 
 FROM alpine:3.12
 
@@ -39,6 +35,6 @@ WORKDIR /
 ENTRYPOINT ["/sbin/tini", "--", "/usr/local/bin/driver"]
 
 # Copy the binaries
-COPY --from=build-gcsfuse /tmp/gcsfuse/bin/* /usr/local/bin/
-COPY --from=build-gcsfuse /tmp/gcsfuse/sbin/* /sbin/
+COPY --from=build-gcsfuse /go/bin/gcsfuse /usr/local/bin/
+COPY --from=build-gcsfuse /go/bin/bin/gcsfuse /sbin/
 COPY bin/driver /usr/local/bin/
