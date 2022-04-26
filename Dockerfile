@@ -12,8 +12,8 @@ RUN mkdir /tmp/bin
 
 # Install gcsfuse using the specified version or commit hash
 RUN go install github.com/googlecloudplatform/gcsfuse@latest
+RUN go install github.com/googlecloudplatform/gcsfuse/tools/build_gcsfuse@latest
 RUN git clone https://github.com/googlecloudplatform/gcsfuse && cd gcsfuse && git checkout "v${gcsfuse_version}"
-RUN go install github.com/googlecloudplatform/gcsfuse/tools/build_gcsfuse
 RUN mkdir /tmp/gcsfuse
 RUN build_gcsfuse ${GOPATH}/src/github.com/googlecloudplatform/gcsfuse /tmp/gcsfuse ${gcsfuse_version} -ldflags "all=${global_ldflags}" -ldflags "-X main.gcsfuseVersion=${gcsfuse_version} ${global_ldflags}"
 
