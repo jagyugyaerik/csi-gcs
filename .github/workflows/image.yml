@@ -87,7 +87,7 @@ jobs:
 
     - name: Package Container
       run: |
-        TAG=$(git describe --long --tags --match='v*' --dirty)
+        TAG=nordcloud
         docker save -o ./container.tar.gz ofekmeister/csi-gcs:$TAG
 
     - uses: actions/upload-artifact@v1
